@@ -126,22 +126,6 @@ class ComplexNumber
 
   public function divideComplex(ComplexNumber $number)
   {
-    /*
-        $tmpReal = $this->real;
-        $this->real = ($this->real / $number->getReal()) + (($this->imaginary / $number->getImaginary()) * -1);
-        $this->imaginary = ($tmpReal / $number->getImaginary()) + ($this->imaginary / $number->getReal());
-        return $this;
-
-        _TypeT __den = __rhs.real() * __rhs.real() + __rhs.imag() * __rhs.imag();
-
-        return complex<_TypeT>(_TypeT (  __lhs.real () * __rhs.real ()  + __lhs.imag () * __rhs.imag ()) / __den,
-                               _TypeT (  __lhs.imag () * __rhs.real ()  - __lhs.real () * __rhs.imag ()) / __den);
-    */
-    /* $den = ($number->real * $number->real) + ($number->imaginary * $number->imaginary);
-     $tmpReal = (($this->real * $number->real + $number->imaginary * $number->imaginary)) / $den;
-     $this->imaginary =  (($this->imaginary * $number->real) - ($this->real * $number->imaginary)) / $den;
-     $this->real = $tmpReal;*/
-
     $den = ($number->real * $number->real) + ($number->imaginary * $number->imaginary);
     $tmpReal = (($this->real * $number->real) + ($this->imaginary * $number->imaginary)) / $den;
     $this->imaginary = (($this->imaginary * $number->real) - ($this->real * $number->imaginary)) / $den;
@@ -190,6 +174,10 @@ class ComplexNumber
         return complex<_TypeT>(__r * _RWSTD_C::cos (__th),  __r * _RWSTD_C::sin (__th));
     }*/
 
+
+
+
+
     $ar = $this->real;
     $ai = $this->imaginary;
     if ($ar == 0 && $ai == 0) {
@@ -202,6 +190,7 @@ class ComplexNumber
       $r = $rho * cos($beta);
       $i = $rho * sin($beta);
     }
+
     $this->real = $r;
     $this->imaginary = $i;
     /*

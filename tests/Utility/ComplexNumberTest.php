@@ -136,7 +136,6 @@ class ComplexNumberTest extends \PHPUnit_Framework_TestCase
    */
   public function squareDataProvider() {
     return [
-      [1, 2, -7, 24,],
       [3, 4, -7, 24,],
       [-3, 8, -55, -48],
 
@@ -165,6 +164,7 @@ class ComplexNumberTest extends \PHPUnit_Framework_TestCase
     return [
       [-3, 8, 2, -55, -48,],
       [-3, 8, 3, 549, -296,],
+      [-3, 8, 4, 721, 5280,],
     ];
   }
 
@@ -180,164 +180,127 @@ class ComplexNumberTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($imaginaryResult, $complex_number1->getImaginary());
   }
 
+  /**
+   * Data provider for testAddComplex().
+   *
+   * @return array
+   *   The data.
+   */
+  public function addComplexDataProvider() {
+    return [
+      [1, 1, 1, 1, 2, 2,],
+      [1, 2, 3, 4, 4, 6,],
+      [1, 2, -3, -4, -2, -2,],
+      [1, 1, 1, 1, 0, 0,],
+      [1, 2, 3, 4, -2, -2,],
+    ];
+  }
 
-
-
-
-  public function testAddComplex1()
+  /**
+   * @dataProvider addComplexDataProvider
+   */
+  public function testAddComplex($real1, $imaginary1, $real2, $imaginary2, $realResult, $imaginaryResult)
   {
-    $complex_number1 = new ComplexNumber(1, 1);
-    $complex_number2 = new ComplexNumber(1, 1);
+    $complex_number1 = new ComplexNumber($real1, $imaginary1);
+    $complex_number2 = new ComplexNumber($real2, $imaginary2);
     $complex_number1->addComplex($complex_number2);
 
-    $this->assertEquals(2, $complex_number1->getReal());
-    $this->assertEquals(2, $complex_number1->getImaginary());
+    $this->assertEquals($realResult, $complex_number1->getReal());
+    $this->assertEquals($imaginaryResult, $complex_number1->getImaginary());
 
     // Passed ComplexNumber should remain the same
-    $this->assertEquals(1, $complex_number2->getReal());
-    $this->assertEquals(1, $complex_number2->getImaginary());
+    $this->assertEquals($real2, $complex_number2->getReal());
+    $this->assertEquals($imaginary2, $complex_number2->getImaginary());
   }
 
-  public function addComplex2()
-  {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(3, 4);
-    $complex_number1->addComplex($complex_number2);
-
-    $this->assertEquals(4, $complex_number1->getReal());
-    $this->assertEquals(6, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(3, $complex_number2->getReal());
-    $this->assertEquals(4, $complex_number2->getImaginary());
+  /**
+   * Data provider for testSubtractComplex().
+   *
+   * @return array
+   *   The data.
+   */
+  public function subtractComplexDataProvider() {
+    return [
+      [1, 2, -3, -4, 4, 6,],
+    ];
   }
 
-  public function addComplex3()
+  /**
+   * @dataProvider subtractComplexDataProvider
+   */
+  public function testSubtractComplex($real1, $imaginary1, $real2, $imaginary2, $realResult, $imaginaryResult)
   {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(-3, -4);
-    $complex_number1->addComplex($complex_number2);
-
-    $this->assertEquals(-2, $complex_number1->getReal());
-    $this->assertEquals(-2, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(-3, $complex_number2->getReal());
-    $this->assertEquals(-4, $complex_number2->getImaginary());
-  }
-
-
-  public function subtractComplex1()
-  {
-    $complex_number1 = new ComplexNumber(1, 1);
-    $complex_number2 = new ComplexNumber(1, 1);
+    $complex_number1 = new ComplexNumber($real1, $imaginary1);
+    $complex_number2 = new ComplexNumber($real2, $imaginary2);
     $complex_number1->subtractComplex($complex_number2);
 
-    $this->assertEquals(0, $complex_number1->getReal());
-    $this->assertEquals(0, $complex_number1->getImaginary());
+    $this->assertEquals($realResult, $complex_number1->getReal());
+    $this->assertEquals($imaginaryResult, $complex_number1->getImaginary());
 
     // Passed ComplexNumber should remain the same
-    $this->assertEquals(1, $complex_number2->getReal());
-    $this->assertEquals(1, $complex_number2->getImaginary());
+    $this->assertEquals($real2, $complex_number2->getReal());
+    $this->assertEquals($imaginary2, $complex_number2->getImaginary());
   }
 
-  public function subtractComplex2()
-  {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(3, 4);
-    $complex_number1->subtractComplex($complex_number2);
-
-    $this->assertEquals(-2, $complex_number1->getReal());
-    $this->assertEquals(-2, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(3, $complex_number2->getReal());
-    $this->assertEquals(4, $complex_number2->getImaginary());
+  /**
+   * Data provider for testMultiplyComplex().
+   *
+   * @return array
+   *   The data.
+   */
+  public function multiplyComplexDataProvider() {
+    return [
+      [2, 3, 1, 4, -10, 11,],
+      [2, 3, -1, -4, 10, -11,],
+    ];
   }
 
-  public function subtractComplex3()
+  /**
+   * @dataProvider multiplyComplexDataProvider
+   */
+  public function testMultiplyComplex($real1, $imaginary1, $real2, $imaginary2, $realResult, $imaginaryResult)
   {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(-3, -4);
-    $complex_number1->subtractComplex($complex_number2);
-
-    $this->assertEquals(4, $complex_number1->getReal());
-    $this->assertEquals(6, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(-3, $complex_number2->getReal());
-    $this->assertEquals(-4, $complex_number2->getImaginary());
-  }
-
-
-  public function multiplyComplex1()
-  {
-    $complex_number1 = new ComplexNumber(2, 3);
-    $complex_number2 = new ComplexNumber(1, 4);
+    $complex_number1 = new ComplexNumber($real1, $imaginary1);
+    $complex_number2 = new ComplexNumber($real2, $imaginary2);
     $complex_number1->multiplyComplex($complex_number2);
 
-    $this->assertEquals(-10, $complex_number1->getReal());
-    $this->assertEquals(11, $complex_number1->getImaginary());
+    $this->assertEquals($realResult, $complex_number1->getReal());
+    $this->assertEquals($imaginaryResult, $complex_number1->getImaginary());
 
     // Passed ComplexNumber should remain the same
-    $this->assertEquals(1, $complex_number2->getReal());
-    $this->assertEquals(4, $complex_number2->getImaginary());
+    $this->assertEquals($real2, $complex_number2->getReal());
+    $this->assertEquals($imaginary2, $complex_number2->getImaginary());
   }
 
-  public function multiplyComplex2()
-  {
-    $complex_number1 = new ComplexNumber(2, 3);
-    $complex_number2 = new ComplexNumber(-1, -4);
-    $complex_number1->multiplyComplex($complex_number2);
-
-    $this->assertEquals(10, $complex_number1->getReal());
-    $this->assertEquals(-11, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(-1, $complex_number2->getReal());
-    $this->assertEquals(-4, $complex_number2->getImaginary());
+  /**
+   * Data provider for testDivideComplex().
+   *
+   * @return array
+   *   The data.
+   */
+  public function divideComplexDataProvider() {
+    return [
+      [1, 2, 2, 1, 0.8, 0.6,],
+      [2, 3, 1, 4, 0.82399999999999995, -0.29399999999999998,],
+      [1, 2, 3, -4, -0.2, 0.4,],
+    ];
   }
 
-  public function divideComplex1()
+  /**
+   * @dataProvider divideComplexDataProvider
+   */
+  public function testDivideComplex($real1, $imaginary1, $real2, $imaginary2, $realResult, $imaginaryResult)
   {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(2, 1);
+    $complex_number1 = new ComplexNumber($real1, $imaginary1);
+    $complex_number2 = new ComplexNumber($real2, $imaginary2);
     $complex_number1->divideComplex($complex_number2);
 
-    $this->assertEquals(0.8, $complex_number1->getReal());
-    $this->assertEquals(0.6, $complex_number1->getImaginary());
+    $this->assertEquals($realResult, $complex_number1->getReal());
+    $this->assertEquals($imaginaryResult, $complex_number1->getImaginary());
 
     // Passed ComplexNumber should remain the same
-    $this->assertEquals(2, $complex_number2->getReal());
-    $this->assertEquals(1, $complex_number2->getImaginary());
-  }
-
-  public function divideComplex2()
-  {
-    $complex_number1 = new ComplexNumber(2, 3);
-    $complex_number2 = new ComplexNumber(1, 4);
-    $complex_number1->divideComplex($complex_number2);
-
-    $this->assertEquals(round(0.824, 3), round($complex_number1->getReal(), 3));
-    $this->assertEquals(round(-0.294, 3), round($complex_number1->getImaginary(), 3));
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(1, $complex_number2->getReal());
-    $this->assertEquals(4, $complex_number2->getImaginary());
-  }
-
-  public function divideComplex3()
-  {
-    $complex_number1 = new ComplexNumber(1, 2);
-    $complex_number2 = new ComplexNumber(3, -4);
-    $complex_number1->divideComplex($complex_number2);
-
-    $this->assertEquals(-0.2, $complex_number1->getReal());
-    $this->assertEquals(0.4, $complex_number1->getImaginary());
-
-    // Passed ComplexNumber should remain the same
-    $this->assertEquals(3, $complex_number2->getReal());
-    $this->assertEquals(-4, $complex_number2->getImaginary());
+    $this->assertEquals($real2, $complex_number2->getReal());
+    $this->assertEquals($imaginary2, $complex_number2->getImaginary());
   }
 
 }
