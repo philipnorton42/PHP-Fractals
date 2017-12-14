@@ -9,6 +9,15 @@ abstract class FractalBase implements FractalInterface {
   protected $maxIteration;
   protected $width;
   protected $height;
+  protected $pixels = [];
+
+  public function setPixel($y, $x, $value) {
+    $this->pixels[$y][$x] = $value;
+  }
+
+  public function getPixels() {
+    return $this->pixels;
+  }
 
   /**
    * @return mixed

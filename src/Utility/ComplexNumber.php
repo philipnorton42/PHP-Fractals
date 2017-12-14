@@ -2,6 +2,11 @@
 
 namespace Hashbangcode\Fractals\Utility;
 
+/**
+ * A class for hold a Complex Number.
+ *
+ * @package Hashbangcode\Fractals\Utility
+ */
 class ComplexNumber
 {
 

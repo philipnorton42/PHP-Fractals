@@ -7,6 +7,36 @@ class Mandlebrot extends FractalBase
 
   public function generate()
   {
+
+    $min_x=-2;
+    $max_x=1;
+    $min_y=-1;
+    $max_y=1;
+
+    for ($y = 0; $y <= $this->getWidth(); $y++) {
+      for ($x = 0; $x <= $this->getHeight(); $x++) {
+        $c1 = $min_x + ($max_x-$min_x) / $this->getHeight() * $x;
+        $c2 = $min_y + ($max_y-$min_y) / $this->getWidth() * $y;
+
+        $z1 = 0;
+        $z2 = 0;
+
+        for ($i = 0; $i < $this->getMaxIteration(); $i++) {
+          $new1 = $z1 * $z1 - $z2 * $z2 + $c1;
+          $new2 = 2 * $z1 * $z2 + $c2;
+          $z1 = $new1;
+          $z2 = $new2;
+          if ($z1 * $z1 + $z2 * $z2 >= 4) {
+            break;
+          }
+        }
+
+        $this->setPixel($y, $x, $i);
+      }
+    }
+
+    return $this->getPixels();
+
     // Set the image width and height
  //   $width = 2000;
 //    $height = 2000;

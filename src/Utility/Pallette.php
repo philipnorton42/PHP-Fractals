@@ -2,6 +2,11 @@
 
 namespace Hashbangcode\Fractals\Utility;
 
+/**
+ * Class Pallette.
+ *
+ * @package Hashbangcode\Fractals\Utility
+ */
 class Pallette implements \ArrayAccess {
 
   public function offsetExists($offset)
