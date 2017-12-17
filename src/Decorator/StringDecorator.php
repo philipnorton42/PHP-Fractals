@@ -16,13 +16,11 @@ class StringDecorator extends FractalDecoratorBase
 
     foreach ($pixels as $y => $value) {
       foreach ($pixels[$y] as $x => $value) {
-        //$string .= str_pad($value, 3, 0);
-
         $percent = ($value * 255) / $this->getFractal()->getMaxIteration();
 
         if ($percent == 0) {
           $string .= '.';
-        } elseif ($percent <= 10) {
+        } elseif ($percent > 1 && $percent <= 10) {
           $string .= ':';
         } elseif ($percent > 10 && $percent <= 50) {
           $string .= '-';
@@ -43,4 +41,5 @@ class StringDecorator extends FractalDecoratorBase
 
     return $string;
   }
+
 }

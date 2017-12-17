@@ -6,8 +6,15 @@ use Hashbangcode\Fractals\Generator\FractalInterface;
 
 abstract class FractalDecoratorBase implements FractalDecoratorInterface {
 
+  /**
+   * @var FractalInterface
+   */
   protected $fractal;
 
+  /**
+   * FractalDecoratorBase constructor.
+   * @param FractalInterface $fractal
+   */
   public function __construct(FractalInterface $fractal) {
     $this->fractal = $fractal;
   }
