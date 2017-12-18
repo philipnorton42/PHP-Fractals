@@ -59,7 +59,7 @@ class ImageDecorator extends FractalDecoratorBase {
         $colour = imagecolorallocate($im, 0, 0, 0);
       } else {
         $colorValue = log($value) / $colorFactor * 255;
-        $colour = imagecolorallocate($im, $colorValue, 255, 255);
+        $colour = imagecolorallocate($im, $colorValue, $colorValue, $colorValue);
       }
       imagesetpixel($im, $x, $y, $colour);
       }
