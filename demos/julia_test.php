@@ -2,6 +2,9 @@
 
 require '../vendor/autoload.php';
 
+ini_set('memory_limit', '1028M');
+set_time_limit(0);
+
 use Hashbangcode\Fractals\Generator\Julia;
 use Hashbangcode\Fractals\Decorator\StringDecorator;
 use Hashbangcode\Fractals\Decorator\ImageDecorator;
@@ -21,14 +24,17 @@ switch ($type) {
     break;
 
   case 'image':
-    $fractal = new Julia(500, 500);
-    $fractal->setMaxIteration(25);
-    //$fractal->setComplexNumber([-0.7, 0.27015]);
-    $fractal->setComplexNumber([0.25, 0.52]);
+    $fractal = new Julia(1000, 1000);
+    $fractal->setMaxIteration(200);
+    $fractal->setComplexNumber([-0.7, 0.27015]);
+    //$fractal->setComplexNumber([0.25, 0.52]);
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
-    $fractalDecorator->setFilename('julia');
+    $fractalDecorator->setFilename('julia' . time());
     $fractalDecorator->render();
     break;
 }
+
+unset($fractal);
+unset($fractalDecorator);
