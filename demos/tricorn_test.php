@@ -26,7 +26,7 @@ switch ($type) {
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
-    $fractalDecorator->setFilename('tricorn');
+    $fractalDecorator->setFilename('output/tricorn' . time());
     $fractalDecorator->render();
 
     break;

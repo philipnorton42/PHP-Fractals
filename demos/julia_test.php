@@ -31,7 +31,7 @@ switch ($type) {
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
-    $fractalDecorator->setFilename('julia' . time());
+    $fractalDecorator->setFilename('output/julia' . time());
     $fractalDecorator->render();
     break;
 }

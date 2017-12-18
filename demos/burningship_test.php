@@ -26,7 +26,7 @@ switch ($type) {
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
-    $fractalDecorator->setFilename('burningship');
+    $fractalDecorator->setFilename('output/burningship' . time());
     $fractalDecorator->render();
 
     break;

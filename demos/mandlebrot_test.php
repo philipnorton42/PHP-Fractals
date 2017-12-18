@@ -26,7 +26,7 @@ switch ($type) {
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
-    $fractalDecorator->setFilename('mandlebrot');
+    $fractalDecorator->setFilename('output/mandlebrot' . time());
     $fractalDecorator->render();
 
     break;
