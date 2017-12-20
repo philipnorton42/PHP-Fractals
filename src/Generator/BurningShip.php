@@ -25,7 +25,7 @@ class BurningShip extends FractalBase
           $z1 = $new1;
           $z2 = $new2;
 
-          if ($z1 * $z1 + $z2 * $z2 >= 4) {
+          if ($z1 * $z1 + $z2 * $z2 >= $this->getEscape()) {
             break;
           }
         }

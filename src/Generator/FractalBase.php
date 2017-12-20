@@ -11,10 +11,28 @@ abstract class FractalBase implements FractalInterface {
   protected $height;
   protected $pixels = [];
 
+  protected $escape = 4;
+
   protected $zoom;
 
   protected $moveX = -0.5;
   protected $moveY = 0;
+
+  /**
+   * @return int
+   */
+  public function getEscape()
+  {
+    return $this->escape;
+  }
+
+  /**
+   * @param int $escape
+   */
+  public function setEscape($escape)
+  {
+    $this->escape = $escape;
+  }
 
   /**
    * @return int
@@ -57,10 +75,16 @@ abstract class FractalBase implements FractalInterface {
   }
 
   /**
+   * Set the zoom factor.
+   *
    * @param float $zoom
+   *   The zoom factor.
    */
   public function setZoom($zoom)
   {
+    if ($zoom == 0) {
+      throw new \Exception('Cannot set zoom factor to 0.');
+    }
     $this->zoom = $zoom;
   }
 

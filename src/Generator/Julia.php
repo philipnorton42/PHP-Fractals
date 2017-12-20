@@ -44,7 +44,7 @@ class Julia extends FractalBase
           $newRe = $oldRe * $oldRe - $oldIm * $oldIm + $this->getComplexNumber()[0];
           $newIm = 2 * $oldRe * $oldIm + $this->getComplexNumber()[1];
 
-          if (($newRe * $newRe + $newIm * $newIm) > 4) {
+          if (($newRe * $newRe + $newIm * $newIm) > $this->getEscape()) {
             break;
           }
         }
