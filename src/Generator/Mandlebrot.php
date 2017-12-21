@@ -12,20 +12,21 @@ class Mandlebrot extends FractalBase
   {
     for ($y = 0; $y <= $this->getWidth(); $y++) {
       for ($x = 0; $x <= $this->getHeight(); $x++) {
-        $newReal = 1.5 * ($x - $this->getWidth() / 2) / (0.5 * $this->getZoom() * $this->getWidth()) + $this->getMoveX();
-        $newImaginary = ($y - $this->getHeight() / 2) / (0.5 * $this->getZoom() * $this->getHeight()) + $this->getMoveY();
+        // Work out the scaled complex number.
+        $realScaled = 1.5 * ($x - $this->getWidth() / 2) / (0.5 * $this->getZoom() * $this->getWidth()) + $this->getMoveX();
+        $imaginaryScaled = ($y - $this->getHeight() / 2) / (0.5 * $this->getZoom() * $this->getHeight()) + $this->getMoveY();
 
-        $z1 = 0;
-        $z2 = 0;
+        $realZ = 0;
+        $imaginaryZ = 0;
 
         for ($i = 0; $i < $this->getMaxIteration(); $i++) {
-          $new1 = $z1 * $z1 - $z2 * $z2 + $newReal;
-          $new2 = 2 * $z1 * $z2 + $newImaginary;
+          $tmpRealZ = ($realZ * $realZ) - ($imaginaryZ * $imaginaryZ) + $realScaled;
+          $tmpImaginaryZ = 2 * $realZ * $imaginaryZ + $imaginaryScaled;
 
-          $z1 = $new1;
-          $z2 = $new2;
+          $realZ = $tmpRealZ;
+          $imaginaryZ = $tmpImaginaryZ;
 
-          if ($z1 * $z1 + $z2 * $z2 >= $this->getEscape()) {
+          if ($realZ * $realZ + $imaginaryZ * $imaginaryZ >= $this->getEscape()) {
             break;
           }
         }

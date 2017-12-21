@@ -32,19 +32,26 @@ class Julia extends FractalBase
    */
   public function generate()
   {
+    // Get the complex number for this Julia set.
+    $complexNumber = $this->getComplexNumber();
+
     for ($y = 0; $y <= $this->getWidth(); $y++) {
       for ($x = 0; $x <= $this->getHeight(); $x++) {
-        $newRe = 1.5 * ($x - $this->getWidth() / 2) / (0.5 * $this->getZoom() * $this->getWidth()) + $this->getMoveX();
-        $newIm = ($y - $this->getHeight() / 2) / (0.5 * $this->getZoom() * $this->getHeight()) + $this->getMoveY();
+        // Work out the scaled complex number.
+        $realScaled = 1.5 * ($x - $this->getWidth() / 2) / (0.5 * $this->getZoom() * $this->getWidth()) + $this->getMoveX();
+        $imaginaryScaled = ($y - $this->getHeight() / 2) / (0.5 * $this->getZoom() * $this->getHeight()) + $this->getMoveY();
+
+        $realZ = $realScaled;
+        $imaginaryZ = $imaginaryScaled;
 
         for ($i = 0; $i < $this->getMaxIteration(); $i++) {
-          $oldRe = $newRe;
-          $oldIm = $newIm;
+          $tmpRealZ = ($realZ * $realZ) - ($imaginaryZ * $imaginaryZ) + $complexNumber[0];
+          $tmpImaginaryZ = 2 * $realZ * $imaginaryZ + $complexNumber[1];
 
-          $newRe = $oldRe * $oldRe - $oldIm * $oldIm + $this->getComplexNumber()[0];
-          $newIm = 2 * $oldRe * $oldIm + $this->getComplexNumber()[1];
+          $realZ = $tmpRealZ;
+          $imaginaryZ = $tmpImaginaryZ;
 
-          if (($newRe * $newRe + $newIm * $newIm) > $this->getEscape()) {
+          if ($realZ * $realZ + $imaginaryZ * $imaginaryZ >= $this->getEscape()) {
             break;
           }
         }
@@ -55,5 +62,4 @@ class Julia extends FractalBase
 
     return $this->getPixels();
   }
-
 }

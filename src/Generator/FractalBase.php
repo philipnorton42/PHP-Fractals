@@ -79,6 +79,9 @@ abstract class FractalBase implements FractalInterface {
    *
    * @param float $zoom
    *   The zoom factor.
+   *
+   * @throws \Exception
+   *   Zoom can't be zero.
    */
   public function setZoom($zoom)
   {
@@ -113,6 +116,8 @@ abstract class FractalBase implements FractalInterface {
   }
 
   /**
+   * Get the maximum number of interations.
+   *
    * @return mixed
    */
   public function getMaxIteration()
