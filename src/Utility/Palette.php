@@ -43,7 +43,7 @@ class Palette implements \ArrayAccess {
 
     // Figure out the percentage of escape.
     $value = $offset / $this->maxIterations * 255;
-    
+
     // Create the palette.
     $colour = [
       // Red.
