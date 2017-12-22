@@ -193,4 +193,23 @@ abstract class FractalBase implements FractalInterface {
    unset($this->zoom);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function generate()
+  {
+    for ($y = 0; $y <= $this->getWidth(); $y++) {
+      for ($x = 0; $x <= $this->getHeight(); $x++) {
+        // Work out the scaled complex number.
+        $realScaled = 1.5 * ($x - $this->getWidth() / 2) / (0.5 * $this->getZoom() * $this->getWidth()) + $this->getMoveX();
+        $imaginaryScaled = ($y - $this->getHeight() / 2) / (0.5 * $this->getZoom() * $this->getHeight()) + $this->getMoveY();
+
+        $escape = $this->calculateEscape($realScaled, $imaginaryScaled);
+        $this->setPixel($y, $x, $escape);
+      }
+    }
+
+    return $this->getPixels();
+  }
+
 }

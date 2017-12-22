@@ -11,4 +11,11 @@ interface FractalInterface {
    *   The set.
    */
   public function generate();
+
+  /**
+   * @param $realScaled
+   * @param $imaginaryScaled
+   * @return mixed
+   */
+  public function calculateEscape($realScaled, $imaginaryScaled);
 }
