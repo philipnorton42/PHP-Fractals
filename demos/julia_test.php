@@ -24,10 +24,14 @@ switch ($type) {
     break;
 
   case 'image':
-    $fractal = new Julia(1000, 1000);
-    $fractal->setMaxIteration(200);
+    $fractal = new Julia(500, 500);
+    $fractal->setMaxIteration(30);
+    $fractal->setEscape(4);
+    $fractal->setZoom(30);
     $fractal->setComplexNumber([-0.7, 0.27015]);
     //$fractal->setComplexNumber([0.25, 0.52]);
+    //$fractal->setComplexNumber([-0.4, 0.6]);
+    //$fractal->setComplexNumber([0, -0.8]);
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);

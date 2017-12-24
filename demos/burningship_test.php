@@ -21,8 +21,9 @@ switch ($type) {
 
     break;
   case 'image':
-    $fractal = new BurningShip(1000, 1000);
+    $fractal = new BurningShip(2000, 2000);
     $fractal->setMaxIteration(200);
+    $fractal->setEscape(100);
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);

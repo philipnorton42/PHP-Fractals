@@ -13,7 +13,9 @@ $type = 'image';
 
 switch ($type) {
   case 'string':
-    $fractal = new Tricorn(100, 100);
+    $fractal = new Tricorn(50, 50);
+    $fractal->setEscape(4);
+    $fractal->setMaxIteration(50);
     $fractal->generate();
 
     $fractalDecorator = new StringDecorator($fractal);
@@ -21,8 +23,9 @@ switch ($type) {
 
     break;
   case 'image':
-    $fractal = new Tricorn(1000, 1000);
+    $fractal = new Tricorn(2000, 2000);
     $fractal->setMaxIteration(200);
+    $fractal->setEscape(100);
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);

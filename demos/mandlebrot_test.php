@@ -13,16 +13,23 @@ $type = 'image';
 
 switch ($type) {
   case 'string':
-    $fractal = new Mandlebrot(100, 100);
-    $fractal->generate();
-
+    $fractal = new Mandlebrot(50, 50);
+    $fractal->setEscape(4);
+    $fractal->setMaxIteration(50);
+    $fractal->threadGenerate();
     $fractalDecorator = new StringDecorator($fractal);
     print $fractalDecorator->render();
 
     break;
   case 'image':
-    $fractal = new Mandlebrot(1000, 1000);
-    $fractal->setMaxIteration(200);
+    $fractal = new Mandlebrot(2000, 2000);
+    $fractal->setMaxIteration(100);
+    $fractal->setEscape(4);
+
+    $fractal->setMoveX(-1.04125);
+    $fractal->setMoveY(0.3501);
+    $fractal->setZoom(10);
+
     $fractal->generate();
 
     $fractalDecorator = new ImageDecorator($fractal);
